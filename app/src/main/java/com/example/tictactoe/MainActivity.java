@@ -66,10 +66,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(player1Turn)
         {
             ((Button) v).setText("X");
+            for(int i=0;i<3;i++)
+            {
+                for(int j=0;j<3;j++)
+                {
+                    buttons[i][j].setBackgroundColor(Color.parseColor("#0000ff"));
+                }
+            }
         }
         else
         {
             ((Button) v).setText("O");
+
+            for(int i=0;i<3;i++)
+            {
+                for(int j=0;j<3;j++)
+                {
+                    buttons[i][j].setBackgroundColor(Color.parseColor("#ff0000"));
+                }
+            }
         }
         roundCount++;
 
