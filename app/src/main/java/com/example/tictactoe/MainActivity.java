@@ -3,7 +3,9 @@ package com.example.tictactoe;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private TextView textViewPlayer1;
     private TextView textViewPlayer2;
+    private TextView textViewPlayer1score;
+    private TextView textViewPlayer2score;
 
 
     @Override
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         textViewPlayer1=findViewById(R.id.text_view_p1);
         textViewPlayer2=findViewById(R.id.text_view_p2);
+
+        textViewPlayer1score=findViewById(R.id.text_view_p1_score);
+        textViewPlayer2score=findViewById(R.id.text_view_p2_score);
         for(int i=0;i<3;i++)
         {
             for(int j=0;j<3;j++)
@@ -130,30 +137,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void player1Wins()
     {
-        player1Points++;
-        Toast.makeText(this,"Player 1 Wins!",Toast.LENGTH_SHORT).show();
-        updatePointsText();
-        resetBoard();
+        Toast.makeText(MainActivity.this,"Player 1 wins!",Toast.LENGTH_SHORT).show();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                player1Points++;
+                updatePointsText();
+                resetBoard();
+
+            }
+        }, 3000);
     }
 
     private void player2Wins()
     {
-        player2Points++;
-        Toast.makeText(this,"Player 2 wins!",Toast.LENGTH_SHORT).show();
-        updatePointsText();
-        resetBoard();
+        Toast.makeText(MainActivity.this,"Player 2 wins!",Toast.LENGTH_SHORT).show();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                player2Points++;
+                updatePointsText();
+                resetBoard();
+
+            }
+        }, 3000);
+
+
     }
 
     private void draw()
     {
         Toast.makeText(this,"Draw:(",Toast.LENGTH_SHORT).show();
-        resetBoard();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                resetBoard();
+            }
+        }, 3000);
     }
 
     private void updatePointsText()
     {
-        textViewPlayer1.setText("Player 1: "+player1Points);
-        textViewPlayer2.setText("Player 2: "+player2Points);
+        textViewPlayer1score.setText(""+player1Points);
+        textViewPlayer2score.setText(""+player2Points);
     }
 
     private void resetBoard()
